@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        NutriScan - Food Calorie Analyser
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVBAR
+========================================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🍃 NutriScan
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="#search">
+            Home
+        </a>
+
+        <a href="#features">
+            Features
+        </a>
+
+        <a href="#calories">
+            Calories
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section
+    class="hero"
+    id="search"
+>
+
+
+    <div class="hero-content">
+
+
+        <div class="badge">
+
+            ✨ Smart Food Nutrition
+
+        </div>
+
+
+        <h1>
+
+            Know What You're
+            <span>Eating.</span>
+
+        </h1>
+
+
+        <p>
+
+            Search your food, choose your quantity
+            and instantly discover calories,
+            protein, carbohydrates and fat.
+
+        </p>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         MAIN SEARCH CARD
+    ====================================== -->
+
+    <div class="search-card">
+
+
+        <h2>
+
+            🔎 Analyse Your Food
+
+        </h2>
+
+
+        <p class="card-subtitle">
+
+            Enter the food you consumed
+
+        </p>
+
+
+
+        <!-- =================================
+             FOOD SEARCH FORM
+        ================================== -->
+
+        <form method="POST">
+
+
+            <!-- FOOD NAME -->
+
+            <div class="input-wrapper">
+
+
+                <span>
+                    🍎
+                </span>
+
+
+                <input
+                    type="text"
+                    name="food_name"
+                    placeholder="e.g. banana, rice, pizza..."
+                    required
+                >
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 QUANTITY
+            ================================== -->
+
+            <div class="quantity-row">
+
+
+                <div class="quantity-box">
+
+
+                    <label>
+                        Quantity
+                    </label>
+
+
+                    <input
+                        type="number"
+                        name="quantity"
+                        value="100"
+                        min="1"
+                        step="1"
+                        required
+                    >
+
+
+                </div>
+
+
+
+                <div class="quantity-box">
+
+
+                    <label>
+                        Unit
+                    </label>
+
+
+                    <select name="unit">
+
+
+                        <option value="g">
+                            Grams (g)
+                        </option>
+
+
+                        <option value="ml">
+                            Millilitres (ml)
+                        </option>
+
+
+                        <option value="serving">
+                            Serving
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- SEARCH BUTTON -->
+
+            <button
+                type="submit"
+            >
+
+                Analyse Food →
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- =================================
+             POPULAR FOODS
+        ================================== -->
+
+        <div class="popular">
+
+
+            <span>
+                Try:
+            </span>
+
+
+            <span>
+                🍌 Banana
+            </span>
+
+
+            <span>
+                🍚 Rice
+            </span>
+
+
+            <span>
+                🥚 Egg
+            </span>
+
+
+            <span>
+                🍕 Pizza
+            </span>
+
+
+        </div>
+
+
+
+        <!-- =================================
+             PHOTO DIVIDER
+        ================================== -->
+
+        <div class="photo-divider">
+
+            <span>
+                OR
+            </span>
+
+        </div>
+
+
+
+        <!-- =================================
+             PHOTO ANALYSIS
+        ================================== -->
+
+        <div
+            class="photo-upload"
+            id="photo"
+        >
+
+
+            <div class="camera-icon">
+
+                📷
+
+            </div>
+
+
+            <h3>
+
+                Analyse Food from Photo
+
+            </h3>
+
+
+            <p>
+
+                Upload a photo of your food
+                and let AI identify it.
+
+            </p>
+
+
+
+            <form
+                method="POST"
+                action="/analyse-image"
+                enctype="multipart/form-data"
+            >
+
+
+                <!-- FILE INPUT -->
+
+                <label
+                    for="food_image"
+                    class="upload-button"
+                >
+
+                    📷 Choose Food Image
+
+                </label>
+
+
+                <input
+                    type="file"
+                    id="food_image"
+                    name="food_image"
+                    accept="image/*"
+                    onchange="previewImage(event)"
+                    required
+                >
+
+
+
+                <!-- IMAGE PREVIEW -->
+
+                <div
+                    id="image-preview-container"
+                >
+
+
+                    <img
+                        id="image-preview"
+                        alt="Food Preview"
+                    >
+
+
+                </div>
+
+
+
+                <!-- PHOTO QUANTITY -->
+
+                <div
+                    class="quantity-row photo-quantity"
+                >
+
+
+                    <div class="quantity-box">
+
+
+                        <label>
+                            Quantity
+                        </label>
+
+
+                        <input
+                            type="number"
+                            name="photo_quantity"
+                            value="100"
+                            min="1"
+                            step="1"
+                        >
+
+
+                    </div>
+
+
+
+                    <div class="quantity-box">
+
+
+                        <label>
+                            Unit
+                        </label>
+
+
+                        <select name="photo_unit">
+
+
+                            <option value="g">
+                                Grams (g)
+                            </option>
+
+
+                            <option value="ml">
+                                Millilitres (ml)
+                            </option>
+
+
+                            <option value="serving">
+                                Serving
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="image-analyse-button"
+                >
+
+                    Analyse Image →
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     MESSAGE
+========================================= -->
+
+{% if message %}
+
+
+<div class="message-container">
+
+
+    <div class="message">
+
+        ⚠️ {{ message }}
+
+    </div>
+
+
+</div>
+
+
+{% endif %}
+
+
+
+<!-- =========================================
+     FOOD RESULT
+========================================= -->
+
+{% if result %}
+
+
+<section
+    class="result-section"
+    id="nutrition"
+>
+
+
+    <div class="result-header">
+
+
+        <p class="small-title">
+
+            YOUR FOOD ANALYSIS
+
+        </p>
+
+
+        <h2>
+
+            {{ result.name }}
+
+        </h2>
+
+
+        <p>
+
+            Estimated nutritional information
+
+        </p>
+
+
+        <p class="consumed-quantity">
+
+            Consumed:
+
+            <strong>
+
+                {{ result.quantity }} g
+
+            </strong>
+
+        </p>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         NUTRITION CARDS
+    ====================================== -->
+
+    <div class="nutrition-grid">
+
+
+        <!-- CALORIES -->
+
+        <div class="nutrition-card">
+
+
+            <div class="icon">
+                🔥
+            </div>
+
+
+            <div>
+
+
+                <p>
+                    Calories
+                </p>
+
+
+                <h3>
+
+                    {{ result.calories }}
+
+                    <small>
+                        kcal
+                    </small>
+
+                </h3>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- PROTEIN -->
+
+        <div class="nutrition-card">
+
+
+            <div class="icon">
+                💪
+            </div>
+
+
+            <div>
+
+
+                <p>
+                    Protein
+                </p>
+
+
+                <h3>
+
+                    {{ result.protein }}
+
+                    <small>
+                        g
+                    </small>
+
+                </h3>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- CARBS -->
+
+        <div class="nutrition-card">
+
+
+            <div class="icon">
+                🌾
+            </div>
+
+
+            <div>
+
+
+                <p>
+                    Carbohydrates
+                </p>
+
+
+                <h3>
+
+                    {{ result.carbs }}
+
+                    <small>
+                        g
+                    </small>
+
+                </h3>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- FAT -->
+
+        <div class="nutrition-card">
+
+
+            <div class="icon">
+                🥑
+            </div>
+
+
+            <div>
+
+
+                <p>
+                    Fat
+                </p>
+
+
+                <h3>
+
+                    {{ result.fat }}
+
+                    <small>
+                        g
+                    </small>
+
+                </h3>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         SUMMARY
+    ====================================== -->
+
+    <div class="summary-card">
+
+
+        <div>
+
+            <span>
+                🔥
+            </span>
+
+
+            <strong>
+
+                {{ result.calories }}
+                kcal
+
+            </strong>
+
+
+        </div>
+
+
+        <p>
+
+            Nutrition values are estimated
+            based on the selected quantity.
+
+        </p>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         HIDDEN CALORIE VALUE
+         JS WILL READ THIS
+    ====================================== -->
+
+    <input
+        type="hidden"
+        id="resultCalories"
+        value="{{ result.calories }}"
+    >
+
+
+
+    <!-- =====================================
+         ADD TO DAILY INTAKE
+    ====================================== -->
+
+    <div class="add-intake-container">
+
+
+        <button
+            type="button"
+            class="add-intake-button"
+            id="addIntakeButton"
+        >
+
+            ➕ Add to Today's Intake
+
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+{% endif %}
+
+
+
+<!-- =========================================
+     DAILY CALORIE TRACKING
+========================================= -->
+
+<section
+    class="tracking-section"
+    id="calories"
+>
+
+
+    <div class="section-heading">
+
+
+        <p>
+            DAILY TRACKING
+        </p>
+
+
+        <h2>
+
+            Track Your
+            <span>Calories.</span>
+
+        </h2>
+
+
+        <p class="section-description">
+
+            Keep an eye on your daily food intake
+            and understand how much you have consumed.
+
+        </p>
+
+
+    </div>
+
+
+
+    <div class="tracking-card">
+
+
+        <div class="tracking-icon">
+            🔥
+        </div>
+
+
+        <h3>
+
+            Today's Calorie Intake
+
+        </h3>
+
+
+
+        <div class="daily-calories">
+
+
+            <span id="dailyCalories">
+                0
+            </span>
+
+
+            <small>
+                kcal
+            </small>
+
+
+        </div>
+
+
+
+        <p>
+
+            Daily Goal:
+
+            <strong>
+                2000 kcal
+            </strong>
+
+        </p>
+
+
+
+        <div class="progress-background">
+
+
+            <div
+                class="progress-bar"
+                id="calorieProgress"
+            ></div>
+
+
+        </div>
+
+
+
+        <div class="tracking-numbers">
+
+
+            <span id="remainingCalories">
+
+                2000 kcal remaining
+
+            </span>
+
+
+            <span>
+
+                Goal: 2000 kcal
+
+            </span>
+
+
+        </div>
+
+
+
+        <button
+            type="button"
+            class="tracking-button"
+            onclick="resetCalories()"
+        >
+
+            Reset Today's Intake
+
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     FEATURES
+========================================= -->
+
+<section
+    class="features"
+    id="features"
+>
+
+
+    <div class="section-heading">
+
+
+        <p>
+            WHAT WE OFFER
+        </p>
+
+
+        <h2>
+
+            Simple. Smart.
+            <span>Nutritious.</span>
+
+        </h2>
+
+
+    </div>
+
+
+
+    <div class="feature-grid">
+
+
+        <!-- FOOD SEARCH -->
+
+        <a
+            href="#search"
+            class="feature-card"
+        >
+
+
+            <div class="feature-icon">
+                🔎
+            </div>
+
+
+            <h3>
+                Food Search
+            </h3>
+
+
+            <p>
+
+                Search for your favourite food
+                and check its nutrition.
+
+            </p>
+
+
+        </a>
+
+
+
+        <!-- CALORIE TRACKING -->
+
+        <a
+            href="#calories"
+            class="feature-card"
+        >
+
+
+            <div class="feature-icon">
+                🔥
+            </div>
+
+
+            <h3>
+                Calorie Tracking
+            </h3>
+
+
+            <p>
+
+                Track your daily calorie intake
+                and remaining calories.
+
+            </p>
+
+
+        </a>
+
+
+
+        <!-- NUTRITION -->
+
+        <a
+            href="#nutrition"
+            class="feature-card"
+        >
+
+
+            <div class="feature-icon">
+                💪
+            </div>
+
+
+            <h3>
+                Nutrition Details
+            </h3>
+
+
+            <p>
+
+                View calories, protein,
+                carbohydrates and fats.
+
+            </p>
+
+
+        </a>
+
+
+
+        <!-- IMAGE -->
+
+        <a
+            href="#photo"
+            class="feature-card"
+        >
+
+
+            <div class="feature-icon">
+                📷
+            </div>
+
+
+            <h3>
+                Image Analysis
+            </h3>
+
+
+            <p>
+
+                Upload a food image
+                for AI analysis.
+
+            </p>
+
+
+        </a>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     ABOUT
+========================================= -->
+
+<section
+    class="about"
+    id="about"
+>
+
+
+    <div class="about-box">
+
+
+        <div>
+
+
+            <p class="small-title">
+
+                ABOUT NUTRISCAN
+
+            </p>
+
+
+            <h2>
+
+                Make better food
+                <span>choices.</span>
+
+            </h2>
+
+
+        </div>
+
+
+
+        <p>
+
+            NutriScan is a smart food nutrition
+            analyser designed to help users
+            understand the estimated nutritional
+            values of everyday foods.
+
+        </p>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+
+    <div class="logo">
+
+        🍃 NutriScan
+
+    </div>
+
+
+    <p>
+
+        Food & Nutrition Analysis
+
+    </p>
+
+
+</footer>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+
+// ==========================================
+// IMAGE PREVIEW
+// ==========================================
+
+function previewImage(event) {
+
+    const image =
+        document.getElementById(
+            "image-preview"
+        );
+
+
+    const container =
+        document.getElementById(
+            "image-preview-container"
+        );
+
+
+    const file =
+        event.target.files[0];
+
+
+    if (file) {
+
+        image.src =
+            URL.createObjectURL(file);
+
+
+        container.style.display =
+            "block";
+
+    }
+
+}
+
+
+
+// ==========================================
+// DAILY CALORIES
+// ==========================================
+
+let dailyCalories =
+    parseFloat(
+        localStorage.getItem(
+            "dailyCalories"
+        )
+    ) || 0;
+
+
+
+// ==========================================
+// UPDATE CALORIE DISPLAY
+// ==========================================
+
+function updateCalorieDisplay() {
+
+
+    const calorieDisplay =
+        document.getElementById(
+            "dailyCalories"
+        );
+
+
+    const remainingDisplay =
+        document.getElementById(
+            "remainingCalories"
+        );
+
+
+    const progress =
+        document.getElementById(
+            "calorieProgress"
+        );
+
+
+    if (!calorieDisplay) {
+
+        return;
+
+    }
+
+
+    const goal = 2000;
+
+
+    calorieDisplay.innerText =
+        Math.round(
+            dailyCalories
+        );
+
+
+    const remaining =
+        Math.max(
+            goal - dailyCalories,
+            0
+        );
+
+
+    remainingDisplay.innerText =
+        Math.round(
+            remaining
+        ) + " kcal remaining";
+
+
+    let percentage =
+        (
+            dailyCalories /
+            goal
+        ) * 100;
+
+
+    percentage =
+        Math.min(
+            percentage,
+            100
+        );
+
+
+    progress.style.width =
+        percentage + "%";
+
+}
+
+
+
+// ==========================================
+// ADD TO DAILY INTAKE
+// ==========================================
+
+function addToDailyIntake(
+    calories
+) {
+
+
+    dailyCalories +=
+        Number(calories);
+
+
+    localStorage.setItem(
+        "dailyCalories",
+        dailyCalories
+    );
+
+
+    updateCalorieDisplay();
+
+
+    alert(
+        "Food added to today's intake!"
+    );
+
+
+    const calorieSection =
+        document.getElementById(
+            "calories"
+        );
+
+
+    if (calorieSection) {
+
+        calorieSection.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+}
+
+
+
+// ==========================================
+// RESET
+// ==========================================
+
+function resetCalories() {
+
+
+    dailyCalories = 0;
+
+
+    localStorage.setItem(
+        "dailyCalories",
+        "0"
+    );
+
+
+    updateCalorieDisplay();
+
+}
+
+
+
+// ==========================================
+// ADD BUTTON
+// ==========================================
+
+const addButton =
+    document.getElementById(
+        "addIntakeButton"
+    );
+
+
+if (addButton) {
+
+
+    addButton.addEventListener(
+        "click",
+        function () {
+
+
+            const calorieElement =
+                document.getElementById(
+                    "resultCalories"
+                );
+
+
+            if (calorieElement) {
+
+
+                const calories =
+                    Number(
+                        calorieElement.value
+                    );
+
+
+                addToDailyIntake(
+                    calories
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+
+// ==========================================
+// PAGE LOAD
+// ==========================================
+
+updateCalorieDisplay();
+
+
+</script>
+
+
+</body>
+
+</html>

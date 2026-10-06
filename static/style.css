@@ -1,0 +1,649 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f6faf7;
+    color: #18352a;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    height: 75px;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-bottom: 1px solid #e5eee8;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #527064;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #24915f;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 650px;
+    padding: 70px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        #effaf3,
+        #ffffff
+    );
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.badge {
+    display: inline-block;
+    padding: 9px 17px;
+    border-radius: 30px;
+    background: #e0f5e8;
+    color: #238653;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: 58px;
+    line-height: 1.08;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #24915f;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #65786f;
+}
+
+
+/* =========================
+   SEARCH CARD
+========================= */
+
+.search-card {
+    width: 100%;
+    max-width: 620px;
+    padding: 35px;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(35, 91, 64, 0.12);
+    text-align: left;
+}
+
+.search-card h2 {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.card-subtitle {
+    text-align: center;
+    color: #82928b;
+    margin-bottom: 25px;
+}
+
+.input-wrapper {
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 18px;
+    border: 1px solid #dce9e1;
+    border-radius: 14px;
+    background: #fafdfb;
+}
+
+.input-wrapper input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+}
+
+.search-card button {
+    width: 100%;
+    height: 55px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 14px;
+    background: #24915f;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-card button:hover {
+    transform: translateY(-2px);
+    background: #1d7d51;
+}
+
+.popular {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 12px;
+    color: #74857d;
+}
+
+.popular span:not(:first-child) {
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #f0f7f3;
+}
+
+
+/* =========================
+   PHOTO ANALYSIS
+========================= */
+
+.photo-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 28px 0;
+    color: #9aa9a2;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.photo-divider::before,
+.photo-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e4ece7;
+}
+
+.photo-upload {
+    text-align: center;
+    padding: 25px 18px;
+    border: 1px dashed #cbded3;
+    border-radius: 18px;
+    background: #f8fcf9;
+}
+
+.camera-icon {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: #e3f5e9;
+    font-size: 25px;
+}
+
+.photo-upload h3 {
+    margin-bottom: 7px;
+}
+
+.photo-upload p {
+    color: #82928b;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+.photo-upload input[type="file"] {
+    display: none;
+}
+
+.upload-button {
+    display: inline-block;
+    padding: 11px 18px;
+    border-radius: 12px;
+    background: white;
+    border: 1px solid #cfe0d6;
+    color: #24915f;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.upload-button:hover {
+    background: #eff9f3;
+}
+
+.image-analyse-button {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    height: 50px;
+    border: none;
+    border-radius: 12px;
+    background: #18352a;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.image-analyse-button:hover {
+    background: #10251d;
+}
+
+#image-preview-container {
+    display: none;
+    margin-top: 18px;
+}
+
+#image-preview {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message-container {
+    padding: 25px 8% 0;
+}
+
+.message {
+    max-width: 1000px;
+    margin: auto;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: #fff5d9;
+    color: #8a6716;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.result-section {
+    padding: 80px 8%;
+    background: white;
+}
+
+.result-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.small-title {
+    color: #24915f;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.result-header h2 {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+.result-header p:last-child {
+    color: #87948e;
+}
+
+.nutrition-grid {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.nutrition-card {
+    padding: 25px;
+    border-radius: 18px;
+    background: #f7faf8;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nutrition-card .icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: white;
+    font-size: 24px;
+}
+
+.nutrition-card p {
+    color: #75847d;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.nutrition-card h3 {
+    font-size: 24px;
+}
+
+.nutrition-card small {
+    font-size: 13px;
+    color: #77857f;
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+.summary-card {
+    max-width: 1000px;
+    margin: 25px auto 0;
+    padding: 20px 25px;
+    border-radius: 18px;
+    background: #eff9f3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.summary-card strong {
+    margin-left: 8px;
+}
+
+.summary-card p {
+    color: #6f8178;
+    font-size: 13px;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.features {
+    padding: 90px 8%;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-heading p {
+    color: #24915f;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.section-heading h2 {
+    font-size: 38px;
+}
+
+.section-heading span {
+    color: #24915f;
+}
+
+.feature-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.feature-card {
+    padding: 30px;
+    border-radius: 20px;
+    background: white;
+    border: 1px solid #e5eee8;
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(35, 91, 64, 0.08);
+}
+
+.feature-icon {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: #74847c;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about {
+    padding: 70px 8%;
+    background: #18352a;
+}
+
+.about-box {
+    max-width: 1050px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    align-items: center;
+}
+
+.about h2 {
+    color: white;
+    font-size: 40px;
+}
+
+.about h2 span {
+    color: #7be0a9;
+}
+
+.about-box > p {
+    max-width: 500px;
+    color: #b6c9bf;
+    line-height: 1.8;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 30px 8%;
+    display: flex;
+    justify-content: space-between;
+    background: #10251d;
+    color: white;
+}
+
+footer p {
+    color: #91a69b;
+    font-size: 14px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .nutrition-grid,
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-box {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding: 50px 15px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .search-card {
+        padding: 25px 20px;
+    }
+
+    .nutrition-grid,
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+/* =========================
+   QUANTITY
+========================= */
+
+.quantity-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.quantity-box {
+    text-align: left;
+}
+
+.quantity-box label {
+    display: block;
+    margin-bottom: 7px;
+    color: #65786f;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.quantity-box input,
+.quantity-box select {
+    width: 100%;
+    height: 52px;
+    padding: 0 14px;
+    border: 1px solid #dce9e1;
+    border-radius: 12px;
+    background: #fafdfb;
+    outline: none;
+    font-size: 14px;
+    color: #18352a;
+}
+
+.quantity-box input:focus,
+.quantity-box select:focus {
+    border-color: #24915f;
+}
+
+.consumed-quantity {
+    margin-top: 10px;
+    color: #74847c;
+    font-size: 14px;
+}
+
+.consumed-quantity strong {
+    color: #24915f;
+}
